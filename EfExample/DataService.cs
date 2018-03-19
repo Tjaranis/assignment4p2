@@ -24,7 +24,6 @@ namespace EfExample
             using (var db = new NorthwindContext())
             {
                 var category = db.Categories.Find(id);
-
                 if (category == null) return null;
                 return category;
             }
@@ -68,7 +67,6 @@ namespace EfExample
                     db.Categories.Remove(category);
                     db.SaveChanges();
                     return true;
-                    //Console.WriteLine("Category deleted ");
                 }
             }
         }
@@ -119,12 +117,12 @@ namespace EfExample
         {
             using (var db = new NorthwindContext())
             {
-                var order = db.Orders.Include(x => x.OrderDetails).FirstOrDefault(y => y.Id == id);
+                var order = db.Orders.Include(x => x.OrderDetails).FirstOrDefault(x => x.Id == id);
 
                 foreach (var orderd in order.OrderDetails)
                 {
                     orderd.Order = order;
-                    orderd.Product = db.Products.Include(x => x.Category).FirstOrDefault(y => y.Id == orderd.ProductId);
+                    orderd.Product = db.Products.Include(x => x.Category).FirstOrDefault(x => x.Id == orderd.ProductId);
                 }
                 return order;
             }
@@ -134,7 +132,7 @@ namespace EfExample
         public List<dynamic> GetOrders()
         {
             var db = new NorthwindContext();
-            return db.Orders.Select(x => new { x.Id, x.Date, x.ShipName, x.ShipCity }).ToList<dynamic>();
+            return db.Orders.Select(x => new { x.Id, x.Date, x.Required, x.ShipName, x.ShipCity }).ToList<dynamic>();
         }
 
         //OrderDetails
