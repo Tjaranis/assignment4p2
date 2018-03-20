@@ -51,7 +51,7 @@ namespace EfExample
                     category.Name = Name;
                     category.Description = Description;
                     db.SaveChanges();
-                    return true;
+                    return true; 
                 }
             }
         }
