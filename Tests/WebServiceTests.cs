@@ -13,8 +13,8 @@ namespace Assignment4.PartII.Tests
 {
     public class WebServiceTests
     {
-        private const string CategoriesApi = "http://localhost:2724/api/categories";
-        private const string ProductsApi = "http://localhost:2724/api/products";
+        private const string CategoriesApi = "http://localhost:5001/api/categories";
+        private const string ProductsApi = "http://localhost:5001/api/products";
 
         /* /api/categories */
 
