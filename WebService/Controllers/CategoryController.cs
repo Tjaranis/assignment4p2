@@ -65,6 +65,5 @@ namespace WebService.Controllers
             _dataService.UpdateCategory(model.Id, model.CategoryName, model.Description);
             return Ok();
         }
-        
     }
 }
