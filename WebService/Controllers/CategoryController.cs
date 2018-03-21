@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebService.Models;
 
 namespace WebService.Controllers
 {
@@ -23,63 +24,29 @@ namespace WebService.Controllers
             var categories = _dataService.GetCategories();
             return Ok(categories);
         }
-        /*
-        [HttpGet]
-        public IActionResult GetCategories()
+
+        [HttpGet("{id}", Name = nameof(GetCategory))]
+        public IActionResult GetCategory(int id)
         {
-            var persons = _dataService.GetPersons().Select(x =>
-            {
-                var model = new PersonListModel { Name = x.Name };
-                model.Url = Url.Link(nameof(GetPerson), new { x.Id });
-                return model;
-            });
-            return Ok(persons);
-        }
-        /*
-        [HttpGet]
-        public IActionResult GetPersons()
-        {
-            var persons = _dataService.GetPersons().Select(x =>
-            {
-                var model = new PersonListModel { Name = x.Name };
-                model.Url = Url.Link(nameof(GetPerson), new { x.Id });
-                return model;
-            });
-            return Ok(persons);
+            string url = Url.Link(nameof(GetCategory), new { id });
+
+            var category = _dataService.GetCategory(id);
+            if (category == null) return NotFound();
+            
+            return Ok(category);
         }
 
-        [HttpGet("{id}", Name = nameof(GetPerson))]
-        public IActionResult GetPerson(int id)
-        {
-            var person = _dataService.GetPerson(id);
-            if (person == null) return NotFound();
-
-
-            var model = new PersonModel
-            {
-                Url = Url.Link(nameof(GetPerson), new { id }),
-                Name = person.Name,
-                Age = person.Age
-            };
-
-            return Ok(model);
-        }
-
-        [HttpPost]
-        public IActionResult CreatePerson([FromBody] CreatePersonModel model)
+        [HttpPost(Name = nameof(CreateCategory))]
+        public IActionResult CreateCategory([FromBody] Category model)
         {
             if (model == null) return BadRequest();
 
-            var person = new Person
-            {
-                Name = model.Name,
-                Age = model.Age
-            };
+            var Category = _dataService.CreateCategory(model.Name, model.Description);
+            //_dataService.CreatePerson(person);
 
-            _dataService.CreatePerson(person);
-
-            return Ok(person);
+            return Created(Url.RouteUrl(nameof(CreateCategory)).ToString(), Category);
         }
-        */
+
+        
     }
 }
