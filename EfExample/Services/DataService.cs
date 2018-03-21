@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace EfExample
 {
-    public class DataService
+    public class DataService : IDataService
     {
         static void Main(string[] args)
         {

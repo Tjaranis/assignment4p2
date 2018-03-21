@@ -4,7 +4,7 @@ using System;
 namespace AdoExample
 {
     class Program
-    {
+    {/*
         static void Main(string[] args)
         {
             var connStr =
@@ -31,6 +31,6 @@ namespace AdoExample
 
             }
 
-        }
+        }*/
     }
 }
