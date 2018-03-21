@@ -22,20 +22,48 @@ namespace WebService.Controllers
         public IActionResult GetCategories()
         {
             var categories = _dataService.GetCategories();
+            if (categories == null) return NotFound();
+
             return Ok(categories);
         }
 
         [HttpGet("{id}", Name = nameof(GetCategory))]
         public IActionResult GetCategory(int id)
         {
-            string url = Url.Link(nameof(GetCategory), new { id });
-
+            //is not used yet
+            //string url = Url.Link(nameof(GetCategory), new { id });
             var category = _dataService.GetCategory(id);
             if (category == null) return NotFound();
-            
             return Ok(category);
         }
 
+        [HttpPost(Name = nameof(CreateCategory))]
+        public IActionResult CreateCategory([FromBody] Category model)
+        {
+            if (model == null) return BadRequest();
+            var Category = _dataService.CreateCategory(model.Name, model.Description);
+            return Created(Url.RouteUrl(nameof(CreateCategory)).ToString()+"/"+Category.Id, Category);
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            _dataService.DeleteCategory(id);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateCategory([FromBody] Category model)
+        {
+            var exist=_dataService.GetCategory(model.Id);
+            if (exist == null) return NotFound();
+
+            _dataService.UpdateCategory(model.Id, model.Name, model.Description);
+            return Ok();
+        }
+
+        /*
         [HttpPost(Name = nameof(CreateCategory))]
         public IActionResult CreateCategory([FromBody] Category model)
         {
@@ -46,7 +74,6 @@ namespace WebService.Controllers
 
             return Created(Url.RouteUrl(nameof(CreateCategory)).ToString(), Category);
         }
-
-        
+        */
     }
 }
