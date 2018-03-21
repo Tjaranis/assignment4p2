@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace WebService.Models
 {
+    /// <summary>
+    /// NOT USED CURRENTLY
+    /// </summary>
     public class CategoryModel
     {
         public string Url { get; set; }
