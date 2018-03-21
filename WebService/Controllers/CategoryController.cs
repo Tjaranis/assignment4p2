@@ -49,6 +49,9 @@ namespace WebService.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
+            var exist = _dataService.GetCategory(id);
+            if (exist == null) return NotFound();
+
             _dataService.DeleteCategory(id);
             return Ok();
         }
@@ -62,18 +65,6 @@ namespace WebService.Controllers
             _dataService.UpdateCategory(model.Id, model.Name, model.Description);
             return Ok();
         }
-
-        /*
-        [HttpPost(Name = nameof(CreateCategory))]
-        public IActionResult CreateCategory([FromBody] Category model)
-        {
-            if (model == null) return BadRequest();
-
-            var Category = _dataService.CreateCategory(model.Name, model.Description);
-            //_dataService.CreatePerson(person);
-
-            return Created(Url.RouteUrl(nameof(CreateCategory)).ToString(), Category);
-        }
-        */
+        
     }
 }
