@@ -15,7 +15,7 @@ namespace Tests
         {
             var category = new Category();
             Assert.Equal(0, category.Id);
-            Assert.Null(category.Name);
+            Assert.Null(category.CategoryName);
             Assert.Null(category.Description);
         }
     
@@ -28,7 +28,7 @@ namespace Tests
             var service = new DataService();
             var categories = service.GetCategories();
             Assert.Equal(8, categories.Count);
-            Assert.Equal("Beverages", categories.First().Name);
+            Assert.Equal("Beverages", categories.First().CategoryName);
         }
         
         [Fact]
@@ -37,7 +37,7 @@ namespace Tests
         {
             var service = new DataService();
             var category = service.GetCategory(1);
-            Assert.Equal("Beverages", category.Name);
+            Assert.Equal("Beverages", category.CategoryName);
         }
         
         [Fact]
@@ -47,7 +47,7 @@ namespace Tests
             var service = new DataService();
             var category = service.CreateCategory("Test", "CreateCategory_ValidData_CreteCategoryAndRetunsNewObject");
             Assert.True(category.Id > 0);
-            Assert.Equal("Test", category.Name);
+            Assert.Equal("Test", category.CategoryName);
             Assert.Equal("CreateCategory_ValidData_CreteCategoryAndRetunsNewObject", category.Description);
 
             // cleanup
@@ -87,7 +87,7 @@ namespace Tests
 
             category = service.GetCategory(category.Id);
 
-            Assert.Equal("UpdatedName", category.Name);
+            Assert.Equal("UpdatedName", category.CategoryName);
             Assert.Equal("UpdatedDescription", category.Description);
 
             // cleanup
@@ -125,7 +125,7 @@ namespace Tests
             var service = new DataService();
             var product = service.GetProduct(1);
             Assert.Equal("Chai", product.Name);
-            Assert.Equal("Beverages", product.Category.Name);
+            Assert.Equal("Beverages", product.Category.CategoryName);
         }
         
         
@@ -149,7 +149,7 @@ namespace Tests
             var products = service.GetProductByCategory(1);
             Assert.Equal(12, products.Count);
             Assert.Equal("Chai", products.First().Name);
-            Assert.Equal("Beverages", products.First().Category.Name);
+            Assert.Equal("Beverages", products.First().Category.CategoryName);
             Assert.Equal("Lakkalikööri", products.Last().Name);
         }
         
@@ -176,7 +176,7 @@ namespace Tests
             var order = service.GetOrder(10248);
             Assert.Equal(3, order.OrderDetails.Count);
             Assert.Equal("Queso Cabrales", order.OrderDetails.First().Product.Name);
-            Assert.Equal("Dairy Products", order.OrderDetails.First().Product.Category.Name);
+            Assert.Equal("Dairy Products", order.OrderDetails.First().Product.Category.CategoryName);
         }
         
         [Fact]

@@ -33,7 +33,7 @@ namespace EfExample
         {
             using (var db = new NorthwindContext())
             {
-                var category = new Category { Name = name, Description = description };
+                var category = new Category { CategoryName = name, Description = description };
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return category;
@@ -48,7 +48,7 @@ namespace EfExample
                 if (category == null) return false;
                 else
                 {
-                    category.Name = Name;
+                    category.CategoryName = Name;
                     category.Description = Description;
                     db.SaveChanges();
                     return true; 

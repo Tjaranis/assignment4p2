@@ -33,7 +33,7 @@ namespace EfExample
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Category>().Property(x => x.Id).HasColumnName("CategoryId");
-            modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnName("CategoryName");
+            modelBuilder.Entity<Category>().Property(x => x.CategoryName).HasColumnName("CategoryName");
             modelBuilder.Entity<Category>().Property(x => x.Description).HasColumnName("Description");
 
             modelBuilder.Entity<Product>().Property(x => x.Id).HasColumnName("ProductId");

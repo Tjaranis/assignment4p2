@@ -41,7 +41,7 @@ namespace WebService.Controllers
         public IActionResult CreateCategory([FromBody] Category model)
         {
             if (model == null) return BadRequest();
-            var Category = _dataService.CreateCategory(model.Name, model.Description);
+            var Category = _dataService.CreateCategory(model.CategoryName, model.Description);
             return Created(Url.RouteUrl(nameof(CreateCategory)).ToString()+"/"+Category.Id, Category);
         }
 
@@ -62,7 +62,7 @@ namespace WebService.Controllers
             var exist=_dataService.GetCategory(model.Id);
             if (exist == null) return NotFound();
 
-            _dataService.UpdateCategory(model.Id, model.Name, model.Description);
+            _dataService.UpdateCategory(model.Id, model.CategoryName, model.Description);
             return Ok();
         }
         
