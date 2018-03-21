@@ -12,12 +12,20 @@ namespace EfExample
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
 
+        string userName = "TestUser";
+        string userPass = "Test";
+        string server = "localhost";
+        string database = "northwind";
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseMySql(
-                "server=localhost;database=northwind;uid=andreea;pwd=password;SslMode=none");
+            optionsBuilder.UseMySql("server=" + server + ";" +
+            "database=" + database + ";" +
+            "uid=" + userName + ";" +
+            "pwd=" + userPass + ";" +
+            "SslMode=none");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
